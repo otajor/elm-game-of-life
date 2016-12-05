@@ -16,27 +16,29 @@ basicCellStyle =
   ]
 
 getCellColor : Bool -> (String, String)
-getCellColor isAlive =
-  if isAlive then
+getCellColor alive =
+  if alive then
     ("background-color", "white")
   else
     ("background-color", "black")
 
 getCellAction : Bool -> Cell -> Msg
-getCellAction isAlive =
-  if isAlive then
+getCellAction alive =
+  if alive then
     RemoveCell
   else
     AddCell
 
 cellToDiv : List Cell -> Cell -> Html Msg
 cellToDiv liveCells cell =
-  div 
-    [ style
-      (((::) <| getCellColor <| isAlive liveCells cell) basicCellStyle)
-    , onClick
-      ((getCellAction <| isAlive liveCells cell) cell)
-    ] []
+  let
+    alive : Bool
+    alive = isAlive liveCells cell
+  in
+    div 
+      [ style (getCellColor alive :: basicCellStyle)
+      , onClick (getCellAction alive cell)
+      ] []
 
 toList : Int -> List Int
 toList boardSize = List.range (negate boardSize) boardSize
@@ -61,7 +63,7 @@ drawRow row =
     ] (row)
 
 
-view: Model -> Html Msg
+view : Model -> Html Msg
 view model =
   div
     [ style

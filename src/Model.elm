@@ -1,7 +1,6 @@
 module Model exposing (..)
 import List
 
--- MODEL
 type alias Cell = (Int, Int) -- denotes cell's location on board
 type alias Model =
   { boardSize : Int
@@ -12,7 +11,7 @@ type alias Model =
 model =
   { boardSize = 40
   , cellSize = 7
-  , liveCells =
+  , liveCells = -- live cells on start
     [ (0,0)
     , (0,1)
     , (0,2)
