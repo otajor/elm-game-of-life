@@ -8359,43 +8359,42 @@ var _elm_lang$html$Html_Events$Options = F2(
 	});
 var _user$project$Model$model = {
 	boardSize: 30,
-	cellSize: 10,
 	liveCells: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 0, _1: 0},
+		_0: {ctor: '_Tuple2', _0: -2, _1: -2},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 0, _1: 1},
+			_0: {ctor: '_Tuple2', _0: -2, _1: -1},
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 0, _1: 2},
+				_0: {ctor: '_Tuple2', _0: -2, _1: 0},
 				_1: {
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 0, _1: 3},
+					_0: {ctor: '_Tuple2', _0: -2, _1: 1},
 					_1: {
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 0, _1: 4},
+						_0: {ctor: '_Tuple2', _0: -2, _1: 2},
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 2, _1: 0},
+							_0: {ctor: '_Tuple2', _0: 0, _1: -2},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 2, _1: 4},
+								_0: {ctor: '_Tuple2', _0: 0, _1: 2},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 4, _1: 0},
+									_0: {ctor: '_Tuple2', _0: 2, _1: -2},
 									_1: {
 										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 4, _1: 1},
+										_0: {ctor: '_Tuple2', _0: 2, _1: -1},
 										_1: {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 4, _1: 2},
+											_0: {ctor: '_Tuple2', _0: 2, _1: 0},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 4, _1: 3},
+												_0: {ctor: '_Tuple2', _0: 2, _1: 1},
 												_1: {
 													ctor: '::',
-													_0: {ctor: '_Tuple2', _0: 4, _1: 4},
+													_0: {ctor: '_Tuple2', _0: 2, _1: 2},
 													_1: {ctor: '[]'}
 												}
 											}
@@ -8410,9 +8409,9 @@ var _user$project$Model$model = {
 		}
 	}
 };
-var _user$project$Model$Model = F3(
-	function (a, b, c) {
-		return {boardSize: a, cellSize: b, liveCells: c};
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {boardSize: a, liveCells: b};
 	});
 var _user$project$Update$shouldLivePredicate = function (_p0) {
 	var _p1 = _p0;
@@ -8528,21 +8527,6 @@ var _user$project$Update$AddCell = function (a) {
 	return {ctor: 'AddCell', _0: a};
 };
 var _user$project$Update$NextTick = {ctor: 'NextTick'};
-var _user$project$View$drawRow = function (row) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$style(
-				{
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'height', _1: '7px'},
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		},
-		row);
-};
 var _user$project$View$toList = function (boardSize) {
 	return A2(
 		_elm_lang$core$List$range,
@@ -8652,11 +8636,15 @@ var _user$project$View$view = function (model) {
 										_0: {ctor: '_Tuple2', _0: 'font-size', _1: '16px'},
 										_1: {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+											_0: {ctor: '_Tuple2', _0: 'font-family', _1: 'Times New Roman'},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px 10px'},
-												_1: {ctor: '[]'}
+												_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px 10px'},
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}),
