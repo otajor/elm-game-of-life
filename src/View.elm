@@ -1,17 +1,17 @@
 module View exposing (..)
 import Model exposing (Model, Cell)
 import Update exposing (..)
-import Html exposing (Html, div, button, text)
+import Html exposing (Html, div, button, text, p)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick, onWithOptions)
 import Json.Decode exposing (succeed)
-import List
+import List exposing (concat, concatMap, map)
 import Debug exposing (..)
 
 basicCellStyle : List (String, String)
 basicCellStyle =
-  [ ("height", "7px")
-  , ("width", "7px")
+  [ ("height", "10px")
+  , ("width", "10px")
   , ("display", "inline-block")
   ]
 
@@ -67,13 +67,25 @@ view : Model -> Html Msg
 view model =
   div
     [ style
-      [ ("width", "567px")
+      [ ("width", "610px")
       , ("height", "100%")
+      , ("margin", "0 auto")
       , ("font-size", "0")
       ]
     ]
-    (List.append
+    (concat
+      [ (generateBoard model)
       --(List.map drawRow (generateBoard model))
-      (generateBoard model)
-      [ button [ onClick NextTick ] [ text "Next" ] ]
+      , [ p 
+          [ style
+            [ ("font-size", "16px")
+            , ("display", "inline-block")
+            , ("margin", "5px 10px")
+            ] 
+          ] [ text "Click on a cell to animate or kill it. Click 'Next' to progress to the next generation."] ]
+      , [ button 
+          [ onClick NextTick ]
+          [ text "Next" ]
+        ]
+      ]
     )

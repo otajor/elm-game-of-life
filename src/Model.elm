@@ -9,8 +9,8 @@ type alias Model =
   }
 
 model =
-  { boardSize = 40
-  , cellSize = 7
+  { boardSize = 30
+  , cellSize = 10
   , liveCells = -- live cells on start
     [ (0,0)
     , (0,1)

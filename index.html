@@ -8358,8 +8358,8 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 var _user$project$Model$model = {
-	boardSize: 40,
-	cellSize: 7,
+	boardSize: 30,
+	cellSize: 10,
 	liveCells: {
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 0, _1: 0},
@@ -8549,18 +8549,18 @@ var _user$project$View$toList = function (boardSize) {
 		_elm_lang$core$Basics$negate(boardSize),
 		boardSize);
 };
-var _user$project$View$getCellAction = function (isAlive) {
-	return isAlive ? _user$project$Update$RemoveCell : _user$project$Update$AddCell;
+var _user$project$View$getCellAction = function (alive) {
+	return alive ? _user$project$Update$RemoveCell : _user$project$Update$AddCell;
 };
-var _user$project$View$getCellColor = function (isAlive) {
-	return isAlive ? {ctor: '_Tuple2', _0: 'background-color', _1: 'white'} : {ctor: '_Tuple2', _0: 'background-color', _1: 'black'};
+var _user$project$View$getCellColor = function (alive) {
+	return alive ? {ctor: '_Tuple2', _0: 'background-color', _1: 'white'} : {ctor: '_Tuple2', _0: 'background-color', _1: 'black'};
 };
 var _user$project$View$basicCellStyle = {
 	ctor: '::',
-	_0: {ctor: '_Tuple2', _0: 'height', _1: '7px'},
+	_0: {ctor: '_Tuple2', _0: 'height', _1: '10px'},
 	_1: {
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'width', _1: '7px'},
+		_0: {ctor: '_Tuple2', _0: 'width', _1: '10px'},
 		_1: {
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
@@ -8570,22 +8570,21 @@ var _user$project$View$basicCellStyle = {
 };
 var _user$project$View$cellToDiv = F2(
 	function (liveCells, cell) {
+		var alive = A2(_user$project$Update$isAlive, liveCells, cell);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$style(
-					F2(
-						function (x, y) {
-							return {ctor: '::', _0: x, _1: y};
-						})(
-						_user$project$View$getCellColor(
-							A2(_user$project$Update$isAlive, liveCells, cell)))(_user$project$View$basicCellStyle)),
+					{
+						ctor: '::',
+						_0: _user$project$View$getCellColor(alive),
+						_1: _user$project$View$basicCellStyle
+					}),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_user$project$View$getCellAction(
-							A2(_user$project$Update$isAlive, liveCells, cell))(cell)),
+						A2(_user$project$View$getCellAction, alive, cell)),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -8618,37 +8617,79 @@ var _user$project$View$view = function (model) {
 			_0: _elm_lang$html$Html_Attributes$style(
 				{
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'width', _1: '567px'},
+					_0: {ctor: '_Tuple2', _0: 'width', _1: '610px'},
 					_1: {
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: 'height', _1: '100%'},
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'font-size', _1: '0'},
-							_1: {ctor: '[]'}
+							_0: {ctor: '_Tuple2', _0: 'margin', _1: '0 auto'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'font-size', _1: '0'},
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}),
 			_1: {ctor: '[]'}
 		},
-		A2(
-			_elm_lang$core$List$append,
-			_user$project$View$generateBoard(model),
+		_elm_lang$core$List$concat(
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$button,
-					{
+				_0: _user$project$View$generateBoard(model),
+				_1: {
+					ctor: '::',
+					_0: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Update$NextTick),
+						_0: A2(
+							_elm_lang$html$Html$p,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'font-size', _1: '16px'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px 10px'},
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Click on a cell to animate or kill it. Click \'Next\' to progress to the next generation.'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					},
-					{
+					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('Next'),
+						_0: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Update$NextTick),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Next'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
 						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
+					}
+				}
 			}));
 };
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
