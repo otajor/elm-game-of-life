@@ -1,12 +1,8 @@
 module TestUpdate exposing (..)
 
 import Test exposing (..)
-import Model exposing (..)
-import Set exposing (Set, fromList)
 import Update exposing (..)
 import Expect
-import Fuzz exposing (list, int, tuple, string)
-import String
 
 all : Test
 all =
@@ -62,10 +58,10 @@ all =
         \() ->
           Expect.equal (shouldLivePredicate { isAlive = False, liveNeighbours = 6 }) False
       ]
-    , describe "liveCellNeighbours"
+    , describe "potentialLiveCells"
       [ test "returns set of neighbours with no duplicates" <|
         \() ->
-          Expect.equal (liveCellNeighbours [(0,0), (1,1)])
+          Expect.equal (potentialLiveCells [(0,0), (1,1)])
             [ (-1,-1)
             , (-1,0)
             , (-1,1)
@@ -83,7 +79,7 @@ all =
             ]
       , test "returns set of neighbours with no duplicates" <|
         \() ->
-          Expect.equal (liveCellNeighbours [(0,0), (4,4)])
+          Expect.equal (potentialLiveCells [(0,0), (4,4)])
             [ (-1,-1)
             , (-1,0)
             , (-1,1)
