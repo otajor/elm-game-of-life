@@ -1,9 +1,9 @@
 module Update exposing (..)
-import Model exposing (..)
+
+import Model exposing (Cell, Model)
 import Html exposing (Html)
 import Set exposing (Set, fromList, toList)
 import List exposing (concatMap, map, append, filter, length, member)
-import Debug
 
 type Msg
   = NextTick

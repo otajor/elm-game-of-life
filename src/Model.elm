@@ -1,5 +1,4 @@
 module Model exposing (..)
-import List
 
 type alias Cell = (Int, Int) -- denotes cell's location on board
 type alias Model =

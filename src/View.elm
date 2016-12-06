@@ -1,12 +1,11 @@
 module View exposing (..)
+
 import Model exposing (Model, Cell)
 import Update exposing (..)
 import Html exposing (Html, div, button, text, p)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onClick, onWithOptions)
-import Json.Decode exposing (succeed)
+import Html.Events exposing (onClick)
 import List exposing (concat, concatMap, map)
-import Debug exposing (..)
 
 basicCellStyle : List (String, String)
 basicCellStyle =
@@ -49,19 +48,9 @@ generateRow { liveCells, boardSize } xCoord =
     (\yCoord -> cellToDiv liveCells (yCoord, xCoord))
     (toList boardSize)
 
---generateBoard : Model -> List (List (Html Msg))
 generateBoard : Model -> List (Html Msg)
 generateBoard model =
-  --List.map (generateRow model) (toList model.boardSize)
   List.concatMap (generateRow model) (toList model.boardSize)
-
-drawRow : List (Html Msg) -> Html Msg
-drawRow row =
-  div
-    [ style
-      [ ("height", "7px") ]
-    ] (row)
-
 
 view : Model -> Html Msg
 view model =
@@ -75,7 +64,6 @@ view model =
     ]
     (concat
       [ (generateBoard model)
-      --(List.map drawRow (generateBoard model))
       , [ p 
           [ style
             [ ("font-size", "16px")

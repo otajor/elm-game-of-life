@@ -8,7 +8,6 @@ import Expect
 import Fuzz exposing (list, int, tuple, string)
 import String
 
-
 all : Test
 all =
   describe "Game of Life"
