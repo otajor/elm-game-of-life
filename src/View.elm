@@ -67,6 +67,7 @@ view model =
       , [ p 
           [ style
             [ ("font-size", "16px")
+            , ("font-family", "Times New Roman")
             , ("display", "inline-block")
             , ("margin", "5px 10px")
             ] 
