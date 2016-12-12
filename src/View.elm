@@ -5,7 +5,8 @@ import Update exposing (..)
 import Html exposing (Html, div, button, text, p)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
-import List exposing (concat, concatMap, map)
+import List exposing (concat, concatMap, map, range)
+import Set exposing (Set)
 
 basicCellStyle : List (String, String)
 basicCellStyle =
@@ -28,7 +29,7 @@ getCellAction alive =
   else
     AddCell
 
-cellToDiv : List Cell -> Cell -> Html Msg
+cellToDiv : Set Cell -> Cell -> Html Msg
 cellToDiv liveCells cell =
   let
     alive : Bool
@@ -39,18 +40,18 @@ cellToDiv liveCells cell =
       , onClick (getCellAction alive cell)
       ] []
 
-toList : Int -> List Int
-toList boardSize = List.range (negate boardSize) boardSize
+makeList : Int -> List Int
+makeList gridSize = range (negate gridSize) gridSize
 
 generateRow : Model -> Int -> List (Html Msg)
-generateRow { liveCells, boardSize } xCoord =
-  List.map
+generateRow { liveCells, gridSize } xCoord =
+  map
     (\yCoord -> cellToDiv liveCells (yCoord, xCoord))
-    (toList boardSize)
+    (makeList gridSize)
 
-generateBoard : Model -> List (Html Msg)
-generateBoard model =
-  List.concatMap (generateRow model) (toList model.boardSize)
+generateGrid : Model -> List (Html Msg)
+generateGrid model =
+  concatMap (generateRow model) (makeList model.gridSize)
 
 view : Model -> Html Msg
 view model =
@@ -63,7 +64,7 @@ view model =
       ]
     ]
     (concat
-      [ (generateBoard model)
+      [ (generateGrid model)
       , [ p 
           [ style
             [ ("font-size", "16px")
